@@ -32,16 +32,28 @@ https://github.com/1058772968-dotcom/write-prd
 已安装 Git 时，可在 macOS / Linux 终端执行：
 
 ```bash
-mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+mkdir -p "$HOME/.agents/skills"
 git clone https://github.com/1058772968-dotcom/write-prd.git \
-  "${CODEX_HOME:-$HOME/.codex}/skills/write-prd"
+  "$HOME/.agents/skills/write-prd"
 ```
 
-也可以下载仓库 ZIP，解压后将包含 `SKILL.md` 的文件夹命名为 `write-prd`，放入 Codex 的个人技能目录。默认位置为 `~/.codex/skills`；设置了 `CODEX_HOME` 时使用其下的 `skills` 目录。
+也可以下载仓库 ZIP，解压后将包含 `SKILL.md` 的文件夹命名为 `write-prd`，放入 Codex 的个人技能目录 `~/.agents/skills`。保留 `agents`、`assets` 和 `references` 的目录结构。
 
-已有同名技能时，先比较内容并保留自己的修改。安装后在下一轮对话中调用 `$write-prd`。
+已有同名技能时，先比较内容并保留自己的修改，不直接覆盖。Codex 会自动发现新技能；如果没有出现，重启 Codex 后调用 `$write-prd`。安装路径与发现机制参考 [OpenAI 官方文档](https://learn.chatgpt.com/docs/build-skills)。
+
+## 使用前准备
+
+提供目标用户、要解决的问题、本期范围，以及已有的原型或需求材料。版本安排、字段规则和验收数据没有确定时，明确告诉 AI 标记为“待确认”。修订已有文档时，同时提供最新正文和本次评审意见。
 
 ## 使用示例
+
+从产品想法开始：
+
+```text
+请使用 $write-prd，为内部会议室预约系统写一份中文 PRD。
+目标用户是行政和员工，本期支持查空闲、预约和取消。
+没有确定的规则请标为“待确认”，默认交付可编辑 Markdown。
+```
 
 先提供原型截图、原型文件或可访问的原型链接，再发送：
 
@@ -106,3 +118,13 @@ write-prd/
 ```
 
 这个 Skill 由 Markdown 和 YAML 文件组成，使用本身不需要安装 Python 或 Node.js 依赖。
+
+## 同系列 Skill
+
+| Skill | 适合的任务 |
+| --- | --- |
+| [write-prd](https://github.com/1058772968-dotcom/write-prd) | 将想法、原型或评审意见整理为产品需求文档 |
+| [case-study-summary](https://github.com/1058772968-dotcom/case-study-summary) | 将部门改进材料整理为有事实依据的提效案例 |
+| [project-handoff](https://github.com/1058772968-dotcom/project-handoff) | 根据当前对话和工作区生成项目交接文档 |
+
+私有仓库需要相应访问权限。
